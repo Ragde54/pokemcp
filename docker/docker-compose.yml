@@ -1,0 +1,17 @@
+services:
+  pokemcp:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    environment:
+      - REDIS_URL=redis://redis:6379
+      - LOG_LEVEL=INFO
+    depends_on:
+      - redis
+    stdin_open: true
+    tty: true
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
