@@ -1,9 +1,17 @@
-from mcp.server.fastmcp import FastMCP
-from pokemcp.tools import pokemon, moves, items, types
+from pokemcp.app import mcp
 
-mcp = FastMCP("pokemcp")
+# Import all tool/resource modules so their @mcp.tool() / @mcp.resource()
+# decorators run and register against the shared mcp instance.
+import pokemcp.tools.pokemon      # noqa: F401
+import pokemcp.tools.moves        # noqa: F401
+import pokemcp.tools.items        # noqa: F401
+import pokemcp.tools.types        # noqa: F401
+import pokemcp.resources.pokedex  # noqa: F401
 
-mcp.include_router(pokemon.router)
-mcp.include_router(moves.router)
-mcp.include_router(items.router)
-mcp.include_router(types.router)
+
+def main():
+    mcp.run()
+
+
+if __name__ == "__main__":
+    main()
